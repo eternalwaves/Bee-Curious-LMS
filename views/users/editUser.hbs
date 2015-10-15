@@ -1,0 +1,40 @@
+<form method="POST" action="/users/save">
+    <div class="form-group">
+        <label for="firstName">First Name</label>
+        <p class="form-control-static">{{userToEdit.firstName}}</p>
+    </div>
+    <div class="form-group">
+        <label for="lastName">Last Name</label>
+        <p class="form-control-static">{{userToEdit.lastName}}</p>
+    </div>
+    <div class="form-group">
+        <label for="username">Username</label>
+        <p class="form-control-static">{{userToEdit.username}}</p>
+    </div>
+    <!-- admins may only change email and role, not user's username or personal information -->
+    <div class="form-group">
+        <label for="email">Email</label>
+        <input class="form-control" type="email" name="email" value="{{userToEdit.email}}">
+    </div>
+    <div class="form-group">
+        <label class="radio-inline">
+            <input type="radio" name="role" value="admin"{{#isEq userToEdit.role 'admin'}} checked{{/isEq}}>
+            Admin
+        </label>
+        <label class="radio-inline">
+            <input type="radio" name="role" value="professor"{{#isEq userToEdit.role 'professor'}} checked{{/isEq}}>
+            Professor
+        </label>
+        <label class="radio-inline">
+            <input type="radio" name="role" value="facilitator"{{#isEq userToEdit.role 'facilitator'}} checked{{/isEq}}>
+            Facilitator
+        </label>
+        <label class="radio-inline">
+            <input type="radio" name="role" value="student"{{#isEq userToEdit.role 'student'}} checked{{/isEq}}>
+            Student
+        </label>
+    </div>
+    <input type="hidden" name="id" value="{{userToEdit._id}}">
+    <button class="btn btn-primary" type="submit">Edit</button>
+    <button class="btn" type="reset">Reset</button>
+</form>

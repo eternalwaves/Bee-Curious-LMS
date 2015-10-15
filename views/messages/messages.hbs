@@ -1,0 +1,40 @@
+<section class="panel">
+    <a class="btn btn-default" href="/messages/new" role="button">
+        <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+        Compose a new message
+    </a>
+</section>
+{{#if msgs}}
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>#</th>
+            {{#if inbox}}
+                <th>From</th>
+            {{/if}}
+            {{#if sent}}
+                <th>To</th>
+            {{/if}}
+            <th>Subject</th>
+            <th>Date</th>
+        </tr>
+    </thead>
+    <tbody>
+        {{#each msgs}}
+            <tr{{#unless this.read}} class="unread"{{/unless}}>
+                <td>{{plusOne @index}}</td>
+                {{#if ../inbox}}
+                    <td><a href="/messages/read/{{this._id}}">{{this.from.fullName}}</a></td>
+                {{/if}}
+                {{#if ../sent}}
+                    <td><a href="/messages/read/{{this._id}}">{{this.to.fullName}}</a></td>
+                {{/if}}
+                <td><a href="/messages/read/{{this._id}}">{{this.subject}}</a></td>
+                <td><a href="/messages/read/{{this._id}}">{{formatDate this.date 'lll'}}</a></td>
+            </tr>
+        {{/each}}
+    </tbody>
+</table>
+{{else}}
+<div class="alert alert-info">No messages found</div>
+{{/if}}

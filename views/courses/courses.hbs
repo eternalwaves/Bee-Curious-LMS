@@ -1,0 +1,34 @@
+{{#isEq user.role 'professor'}}
+<section class="panel">
+    <a class="btn btn-default" href="/courses/new" role="button">
+        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+        Create a new course
+    </a>
+</section>
+{{/isEq}}
+{{#if courses}}
+<table class="table usertable">
+    <thead>
+        <tr>
+            <th>Code</th>
+            <th>Title</th>
+            <th>Professor</th>
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        {{#each courses}}
+            <tr>
+                <td>{{this.code}}</td>
+                <td>{{this.title}}</td>
+                <td>{{this.professor.fullName}}</td>
+                <td><form method="post" action="/courses/edit"><input type="hidden" name="_id" value="{{this._id}}"><button class="btn btn-link btn-sm" type="submit">Edit</button></form></td>
+                <td><form method="post" action="/courses/delete"><input type="hidden" name="_id" value="{{this._id}}"><button class="btn btn-link btn-sm" type="submit">Delete</button></form></td>
+            </tr>
+        {{/each}}
+    </tbody>
+</table>
+{{else}}
+<div class="alert alert-info">No courses found</div>
+{{/if}}

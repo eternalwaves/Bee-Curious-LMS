@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{title}}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css" />
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+    <nav class="navbar navbar-inverse navbar-static-top" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/">Bee Curious</a>
+            </div>
+            <div class="collapse navbar-collapse">
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="/">Home</a></li>
+                    {{> userMenus}}
+                </ul>
+                {{> loginNav}}
+            </div>
+        </div>
+    </nav>
+    <main class="container">
+        <h1 class="page-header">{{title}}</h1>
+        {{#if messages.error}}
+        <div class="alert alert-danger">
+            {{messages.error}}
+        </div>
+        {{/if}}
+        {{#if messages.info}}
+        <div class="alert alert-info">
+            {{messages.info}}
+        </div>
+        {{/if}}
+        {{#if messages.success}}
+        <div class="alert alert-success">
+            {{messages.success}}
+        </div>
+        {{/if}}
+        {{{body}}}
+    </main>
+    <!-- wysihtml core javascript with default toolbar functions --> 
+    <script src="/javascripts/wysihtml/dist/wysihtml5x-toolbar.min.js"></script>
+
+    <!-- rules defining tags, attributes and classes that are allowed -->
+    <script src="/javascripts/wysihtml/parser_rules/advanced_and_extended.js"></script>
+
+    <script>
+    // so it doesn't get defined twice
+    $(function() {
+        var editor = new wysihtml5.Editor($('.editable').get(0), {
+            toolbar:  $('.toolbar').get(0),
+            parserRules:  wysihtml5ParserRules,
+            stylesheets: '/stylesheets/wysihtml/stylesheet.css'
+        });
+        $( ".datepicker" ).datepicker({
+            dateFormat: 'yy-mm-dd'
+        });
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,55 @@
+{{#if user}}
+    <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Messages <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+            <li><a href="/messages/inbox">Inbox</a></li>
+            <li><a href="/messages/sent">Sent</a></li>
+        </ul>
+    </li>
+    {{#isEq user.role 'student'}}
+        <li><a href="/courses">Courses</a></li>
+        <li><a href="/grades">Grades</a></li>
+    {{/isEq}}
+    {{#isEq user.role 'facilitator'}}
+        <li><a href="/grades">Courses</a></li>
+        <li><a href="/courses">Courses</a></li>
+        {{#if course}}
+        <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{course.code}} <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+                <li><a href="/courses/id/{{course._id}}">Course Home</a></li>
+                <li><a href="/courses/id/{{course._id}}/modules">Modules</a></li>
+                <li><a href="/courses/id/{{course._id}}/assignments">Assignments</a></li>
+                <li><a href="/courses/id/{{course._id}}/quizzes">Quizzes</a></li>
+                <li><a href="/courses/id/{{course._id}}/groups">Groups</a></li>
+                <li><a href="/courses/id/{{course._id}}/grades">Grades</a></li>
+            </ul>
+        </li>
+        {{/if}}
+    {{/isEq}}
+    {{#isEq user.role 'professor'}}
+        <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Courses <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+                <li><a href="/courses">View All</a></li>
+                <li><a href="/courses/new">Create a New Course</a></li>
+            </ul>
+        </li>
+        {{#if course}}
+        <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{course.code}} <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+                <li><a href="/courses/id/{{course._id}}">Course Home</a></li>
+                <li><a href="/courses/id/{{course._id}}/modules">Modules</a></li>
+                <li><a href="/courses/id/{{course._id}}/assignments">Assignments</a></li>
+                <li><a href="/courses/id/{{course._id}}/quizzes">Quizzes</a></li>
+                <li><a href="/courses/id/{{course._id}}/groups">Groups</a></li>
+                <li><a href="/courses/id/{{course._id}}/grades">Grades</a></li>
+            </ul>
+        </li>
+        {{/if}}
+    {{/isEq}}
+    {{#isEq user.role 'admin'}}
+        <li><a href="/users">Users</a></li>
+    {{/isEq}}
+{{/if}}

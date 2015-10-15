@@ -1,0 +1,32 @@
+<form method="POST" action="/courses/save">
+    <div class="form-group">
+        <label for="code">Code</label>
+        <input class="form-control" type="text" name="code" required autofocus>
+    </div>
+    <div class="form-group">
+        <label for="title">Title</label>
+        <input class="form-control" type="text" name="title" required>
+    </div>
+    <div class="form-group">
+        <label for="description">Description</label>
+        {{> richEditor name='description'}}
+    </div>
+    <div class="form-group">
+        <label for="startDate">Start Date</label>
+        {{> datePicker name='startDate' content=startDate}}
+    </div>
+    <div class="form-group">
+        <label for="endDate">End Date</label>
+        {{> datePicker name='endDate' content=endDate}}
+    </div>
+    <div class="form-group">
+        <label for="facilitators">Facilitators <small>Ctrl+click to select multiples</small></label>
+        <select class="form-control" name="facilitators" multiple>
+            {{#each facilitators}}
+                <option value="{{this._id}}"{{#if this.selected}} selected{{/if}}>{{this.fullName}}</option>
+            {{/each}}
+        </select>
+    </div>
+    <button class="btn btn-primary" type="submit">Create</button>
+    <button class="btn btn-default" type="reset">Reset</button>
+</form>
